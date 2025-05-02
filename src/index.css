@@ -1,0 +1,139 @@
+/* src/index.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Optional custom styles below */
+
+/* index.css */
+@layer base {
+  /* Base font family */
+  :root {
+    --green-button-bg: #48bb78; /* Green button background color */
+  }
+
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background-color: #f0fdf4; /* Light green background */
+    color: #374151; /* Darker text for contrast */
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+  
+
+  /* Global styling for headings */
+  h1, h2, h3, h4, h5, h6 {
+    color: #2f855a; /* Subtle green for headings */
+    font-weight: 700;
+  }
+
+  /* Global link styling */
+  a {
+    color: #2b6cb0; /* Soft blue link color */
+    text-decoration: none;
+  }
+
+  a:hover {
+    color: #2c7a7b; /* Muted green when hovered */
+    text-decoration: underline;
+  }
+
+  /* Body text (for paragraphs, lists, etc.) */
+  p {
+    color: #4a5568; /* Grayish dark color for readability */
+    line-height: 1.6;
+  }
+
+  /* Button styling */
+  button {
+    transition: all 0.3s;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 0.375rem; /* Rounded corners */
+    transition: background-color 0.3s;
+  }
+
+  button:hover {
+    background-color: #38a169; /* Darker green on hover */
+  }
+
+  /* Input fields and form controls */
+  input, select, textarea {
+    border: 1px solid #e2e8f0; /* Light gray borders */
+    padding: 0.5rem;
+    border-radius: 0.375rem;
+    background-color: #f7fafc; /* Light background for inputs */
+  }
+
+  /* Forms with subtle green theme */
+  .form-container {
+    background-color: #e6fffa; /* Light teal green background */
+    border-radius: 0.5rem;
+    padding: 2rem;
+  }
+}
+
+@layer components {
+  /* Button specific styles */
+  .btn-green {
+    background-color: var(--green-button-bg); /* Green background */
+    color: #ffffff; /* White text */
+    padding: 0.5rem 1rem; /* Padding */
+    border-radius: 0.5rem; /* Rounded corners */
+    transition: background-color 0.3s; /* Smooth transition */
+  }
+  .btn-green:hover {
+    background-color: #38a169; /* Darker green on hover */
+  }
+
+  /* Card container */
+  .card {
+    background-color: #ffffff; /* White background */
+    padding: 1.5rem; /* Padding */
+    border-radius: 0.5rem; /* Rounded corners */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Optimized shadow */
+    border: 1px solid #e2e8f0; /* Light gray border */
+  }
+  .card-header {
+    font-size: 1.5rem; /* Large font size */
+    font-weight: 600; /* Semi-bold */
+    color: #38a169; /* Green text */
+  }
+  .card-body {
+    color: #4a5568; /* Grayish dark color */
+  }
+  .card-footer {
+    color: #718096; /* Light gray text */
+    font-size: 0.875rem; /* Small font size */
+  }
+
+  /* Soft background color for entire page */
+  body {
+    background-color: #f0fff4; /* Light green background */
+  }
+} /* Closing @layer components block */
+
+@layer utilities {
+  /* Utility classes for background colors */
+  .bg-green-light {
+    background-color: #c6f6d5; /* Light green background */
+  }
+  .bg-green-dark {
+    background-color: #2f855a; /* Darker green */
+  }
+
+  .text-light-green {
+    color: #38a169; /* Light green text */
+  }
+
+  .text-green-dark {
+    color: #2f855a; /* Dark green text */
+  }
+
+    .border-green-light {
+      border-color: #9ae3d3; /* Light green border */
+    }
+  }
