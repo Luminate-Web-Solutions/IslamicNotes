@@ -1,23 +1,16 @@
-import { useAuth } from '../context/AuthContext';
-
 import React from 'react';
 import { Link } from 'react-router-dom';
 
 const Header = ({ query, setQuery }) => {
-  const { user, logout } = useAuth();
 
  // Base nav links
  const navLinks = [
   { to: '/', label: 'Home' },
   { to: '/about', label: 'About' },
-  { to: '/contact', label: 'Contact Us' },
   { to: '/notes', label: 'Notes' },
+  { to: '/contact', label: 'Contact Us' },
 ];
 
-// Only show Admin Panel if user is admin
-if (user?.role === 'admin') {
-  navLinks.push({ to: '/admin', label: 'Admin Panel' });
-}
 
   return (
     <header className="sticky top-0 z-50 bg-white shadow-md px-4 py-4">
@@ -26,7 +19,7 @@ if (user?.role === 'admin') {
 
         {/* Logo or Title */}
         <div className="text-3xl sm:text-4xl font-extrabold text-green-700 tracking-wide font-serif">
-          IslamicNotes<span className="text-green-500">.in</span>
+          Islamic<span className="text-green-500">Notes</span>
         </div>
 
            {/* Search Bar */}
@@ -52,24 +45,6 @@ if (user?.role === 'admin') {
               {link.label}
             </Link>
           ))}
-
-  {/* Login/Logout Button */}
-  {user ? (
-            <button
-              onClick={logout}
-              className="text-red-600 font-medium hover:underline"
-            >
-              Logout ({user.email})
-            </button>
-          ) : (
-            <Link
-              to="/login"
-              className="text-green-700 px-3 py-2 rounded-md text-lg font-medium hover:bg-green-100"
-            >
-              Login
-            </Link>
-          )}
-
         </nav>
       </div>
     </header>
