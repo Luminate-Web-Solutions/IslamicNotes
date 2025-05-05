@@ -172,11 +172,13 @@ const NotesSection = () => {
 
   return (
     <section
-      className="min-h-screen px-4 sm:px-10 py-16 text-green-400 bg-cover bg-no-repeat bg-fixed"
-      style={{
-        backgroundImage: "url('/assets/pattern.png')",
-      }}
-    >
+  id="notes"  // ✅ This enables scroll-to-section on click
+  className="min-h-screen px-4 sm:px-10 py-16 text-green-400 bg-cover bg-no-repeat bg-fixed"
+  style={{
+    backgroundImage: "url('/assets/pattern.png')",
+  }}
+>
+
       <div className="text-center mb-12">
         <h2 className="text-4xl font-bold mb-2">Explore Islamic Notes</h2>
         <p className="text-lg">Browse and learn from authentic Islamic sources.</p>

@@ -15,4 +15,4 @@ export function useSearch() {
   return useContext(SearchContext);
 }
 
-export default SearchProvider;  // <-- Add this line
+export default SearchProvider; 
