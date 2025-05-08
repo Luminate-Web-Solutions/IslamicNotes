@@ -24,20 +24,20 @@ const HadithFlashcards = ({ data }) => {
 
   return (
     <motion.div
-      className="bg-white p-6 rounded-xl shadow-md border border-emerald-200"
+      className="bg-emerald-800 p-6 rounded-xl shadow-lg border hover:bg-emerald-700 border-emerald-300"
       variants={containerVariants}
       initial="hidden"
       animate="visible"
     >
       <motion.h2
-        className="text-xl font-semibold text-emerald-800 mb-2"
+        className="text-xl font-semibold text-white mb-2"
         variants={titleVariants}
       >
         {data.title}
       </motion.h2>
-      <p className="text-gray-800 mb-2">{data.text}</p>
+      <p className="text-yellow-50 mb-2">{data.text}</p>
       {data.category && (
-        <p className="text-sm text-emerald-600 font-medium">
+        <p className="text-sm text-white font-medium">
           Category: {data.category}
         </p>
       )}

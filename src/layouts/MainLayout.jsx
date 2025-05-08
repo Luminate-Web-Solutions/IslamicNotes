@@ -4,7 +4,6 @@ import { useSearch } from '../context/SearchContext';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import Footer from '../components/Footer'; 
-import HadithFlashcards from '../components/HadithFlashcards';
 
 
 const headings = [

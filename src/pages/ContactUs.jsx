@@ -2,9 +2,18 @@ import React from 'react';
 
 const Contact = () => {
   return (
-    <section id="Contact Us" className="max-w-4xl mx-auto px-6 py-12 bg-white shadow-lg rounded-2xl mt-10">
+    <section id="Contact Us" className="max-w-8xl mx-auto px-6 py-12 bg-white shadow-lg rounded-2xl mt-3">
 
-      <h2 className="text-4xl font-bold text-center text-green-800 mb-2">Contact Us</h2>
+      <h2 className="text-9xl font-bold text-center text-green-800 mb-2">Contact Us</h2>
+      <div className="flex justify-center my-8">
+  <iframe
+    src="https://lottie.host/embed/6a9b8388-e1cf-4a80-8686-b196e5984b57/7X4qdovS0I.lottie"
+    className="w-full max-w-xl h-80 rounded-lg shadow-lg hover:border-emerald-400"
+    allowFullScreen
+    loading="lazy"
+  ></iframe>
+</div>
+
       <p className="text-center text-green-600 text-lg mb-8">
         Reach out for any queries or services. We're here to help!
       </p>

@@ -1,37 +1,51 @@
 import React from "react";
 import { motion } from "framer-motion";
+import {
+  FaBookOpen,
+  FaMobileAlt,
+  FaUsers,
+  FaFolderOpen,
+  FaInfinity,
+  FaShieldAlt,
+} from "react-icons/fa";
 
 const features = [
   {
     title: "Authentic Resources",
     description:
       "All notes are based on Qur’an and authentic Hadith, verified by knowledgeable individuals to ensure trust and reliability.",
-  },
+      icon: <FaBookOpen className="text-4xl text-emerald-600 mb-4" />,
+    },
   {
     title: "Easy Access",
     description:
       "Access our content from any device, with smooth downloads and optimized mobile readability for a seamless experience.",
-  },
+      icon: <FaMobileAlt className="text-4xl text-emerald-600 mb-4" />,
+    },
   {
     title: "Community Driven",
     description:
       "Our platform grows with your contributions. Upload your notes, share your knowledge, and help others benefit.",
-  },
+      icon: <FaUsers className="text-4xl text-emerald-600 mb-4" />,
+    },
   {
     title: "Organized Topics",
     description:
       "Explore categorized notes by topic, speaker, or series for quick access to the material you're looking for.",
-  },
+      icon: <FaFolderOpen className="text-4xl text-emerald-600 mb-4" />,
+    },
   {
     title: "Free Forever",
     description:
       "Knowledge should be free. Our platform provides all materials without any charges, subscriptions, or ads.",
-  },
+      icon: <FaInfinity className="text-4xl text-emerald-600 mb-4" />,
+    },
   {
     title: "Safe & Private",
     description:
       "Your uploads and downloads are secure with us. We value privacy and don’t track or misuse any user data.",
-  },
+      icon: <FaShieldAlt className="text-4xl text-emerald-600 mb-4" />,
+    },
 ];
 
 const Home = () => {

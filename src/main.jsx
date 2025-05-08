@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider,} from 'react-router-dom';
 import { SearchProvider } from './context/SearchContext';
 import './index.css';
+
+
 // Pages
 import MainLayout from './layouts/MainLayout';
 import Home from './pages/Home';
@@ -11,7 +13,6 @@ import Notes from './pages/Notes';
 import ContactUs from './pages/ContactUs';
 import PDFReader from './pages/PDFReader';
 import Categories from './data/Categories';
-import HadithFlashcards from './components/HadithFlashcards';
 
 // ✅ Define your router
 const router = createBrowserRouter([
@@ -25,7 +26,7 @@ const router = createBrowserRouter([
       { path: 'contact', element: <ContactUs /> },
       { path: 'read/:fileName', element: <PDFReader /> },
       { path: 'categories', element: <Categories /> },
-      { path: 'HadithFlashcard', element: <HadithFlashcards /> },
+    
       
     ],
   },

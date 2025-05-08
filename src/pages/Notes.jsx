@@ -207,7 +207,7 @@ const NotesSection = () => {
 
           
             {/* Title */}
-            <h3 className="text-xl font-bold text-emerald-700 mb-2">{note.title}</h3>
+            <h3 className="text-xl font-bold text-emerald-700 mb-2 pr-6" >{note.title}</h3>
           
             {/* Description */}
             <p className="text-sm text-gray-700 mb-4 leading-relaxed">{note.description}</p>
