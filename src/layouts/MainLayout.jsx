@@ -1,9 +1,10 @@
 import React from 'react';
-import { Outlet, useOutletContext } from "react-router-dom";
+import { Outlet } from "react-router-dom";
 import { useSearch } from '../context/SearchContext';
 import Header from '../components/Header';
 import SearchBar from '../components/SearchBar';
 import Footer from '../components/Footer'; 
+import HadithFlashcards from '../components/HadithFlashcards';
 
 
 const headings = [
@@ -23,20 +24,24 @@ const MainLayout = () => {
   
   return (
     <div
-      className="min-h-screen bg-repeat text-gray-900"
-      style={{
-        backgroundRepeat: "repeat",
-        backgroundSize: "auto",
-        backgroundColor: "#f3fef3" // matches your pattern bg
-      }}
-    >
+    className="min-h-screen bg-repeat text-gray-900"
+    style={{
+      background:  "color: #f0f4f8",
+      backgroundSize: "cover",
+      backgroundPosition: "center",
+      backgroundAttachment: "fixed",
+     
+    }}
+  >
       <div className="min-h-screen flex flex-col bg-white/40 text-green-900 border-b border-green-500 shadow-sm">
         <Header query={query} setQuery={setQuery} />
 
         <main className="flex-grow p-6 sm:p-10">
           <SearchBar query={query} headings={headings} />
+          
           <Outlet />
         </main>
+
        
         <Footer />
       </div>

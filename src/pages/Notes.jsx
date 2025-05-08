@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from "react-router-dom";
+import { BookOpen } from 'lucide-react';
+
 
 const notes = [
   {
@@ -172,10 +174,10 @@ const NotesSection = () => {
 
   return (
     <section
-  id="notes"  // ✅ This enables scroll-to-section on click
+  id="notes"  
   className="min-h-screen px-4 sm:px-10 py-16 text-green-400 bg-cover bg-no-repeat bg-fixed"
   style={{
-    backgroundImage: "url('/assets/pattern.png')",
+  
   }}
 >
 
@@ -185,7 +187,7 @@ const NotesSection = () => {
         <input
           type="text"
           placeholder="Search notes..."
-          className="mt-6 px-7 py-3 rounded-md border border-green-400 w-full max-w-md text-center focus:outline-green-800 focus:ring-3 focus:ring-green-600"
+          className="mt-6 px-9 py-4 rounded-lg border border-green-500 w-full max-w-md text-center focus:outline-green-800 focus:ring-5 focus:ring-emerald-600"
           value={searchTerm}
           onChange={(e) => setSearchTerm(e.target.value)} // Update search term as user types
         />
@@ -194,22 +196,31 @@ const NotesSection = () => {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto px-4">
       {filteredNotes.length > 0 ? (
           filteredNotes.map((note, idx) => (
-          <div
+            <div
             key={idx}
-            className="relative backdrop-blur-md bg-green-100 border border-green-200 rounded-full shadow-lg p-8 transition-transform duration-300 ease-in-out hover:scale-[1.03] hover:shadow-2xl"
+            className="relative bg-white border border-emerald-200 rounded-xl shadow-md p-6 hover:shadow-lg transition-transform duration-300 hover:scale-105"
           >
-            <h3 className="text-2xl font-extrabold text-green-700 mb-3">{note.title}</h3>
-            <p className="text-gray-700 mb-6 leading-relaxed">{note.description}</p>
-            <button
-        onClick={() => openPDF(note.pdf)}
-        className="inline-block text-sm bg-green-600 text-white justify-evenly py-2 px-6 rounded-full hover:bg-green-700 transition duration-200"
-      >
-        Read More
-      </button>
+            {/* Optional Book Icon */}
+            <div className="absolute top-4 right-4 text-emerald-900">
+  <BookOpen size={32} strokeWidth={1.5} className="opacity-13" />
+</div>
 
-        {/* Book Icon */}
-        <div className="absolute top-3 right-5 text-dark-green-900 text-4xl opacity-10 pointer-events-none select-none">📘</div>
-      </div>
+          
+            {/* Title */}
+            <h3 className="text-xl font-bold text-emerald-700 mb-2">{note.title}</h3>
+          
+            {/* Description */}
+            <p className="text-sm text-gray-700 mb-4 leading-relaxed">{note.description}</p>
+          
+            {/* Button */}
+            <button
+              onClick={() => openPDF(note.pdf)}
+              className="mt-auto bg-emerald-600 text-white text-sm px-5 py-2 rounded-md hover:bg-emerald-700 transition"
+            >
+              Read More
+            </button>
+          </div>
+          
     ))
   ) : (
     <p className="text-center text-gray-800">No notes found.</p>

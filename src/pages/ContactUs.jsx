@@ -8,7 +8,11 @@ const Contact = () => {
       <p className="text-center text-green-600 text-lg mb-8">
         Reach out for any queries or services. We're here to help!
       </p>
-
+      <div className="grid md:grid-cols-3 gap-10">
+        <div className="lg:flex gap-10">
+    
+        </div>
+      </div>
       <form className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div className="flex flex-col">
@@ -53,11 +57,21 @@ const Contact = () => {
           </button>
         </div>
       </form>
-
+ 
+ {/* Map */}
+ <div className="mt-12">
+        <iframe
+          title="SD Hub Location"
+          className="w-full h-96 rounded-xl border-2 border-green-100"
+          src="https://www.openstreetmap.org/export/embed.html?bbox=78.402%2C17.362%2C78.472%2C17.412&layer=mapnik&marker=17.382%2C78.437"
+          allowFullScreen
+          loading="lazy"
+        ></iframe>
+      </div>
       <div className="mt-12 text-center text-green-800">
         <hr className="my-6 border-green-100" />
-        <p className="text-green-700 font-semibold"><a href="mailto:example@email.com">example@email.com</a></p>
-        <p className="mt-2">designed by <br />Luminate Web Solutions</p>
+        
+       
       </div>
     </section>
   );

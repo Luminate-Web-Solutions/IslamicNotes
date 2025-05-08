@@ -65,7 +65,7 @@ const About = () => {
       <div className="mt-12 text-center">
         <a
           href="/notes"
-          className="inline-block bg-green-600 text-white py-3 px-8 rounded-full text-lg shadow-md hover:bg-green-200 transition-all duration-300"
+          className="inline-block bg-green-600 text-white py-3 px-8 rounded-full text-lg shadow-md  hover:bg-emerald-600 hover:text-white transition-all duration-300"
         >
           Explore Notes
         </a>
