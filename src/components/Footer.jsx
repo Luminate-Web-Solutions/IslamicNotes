@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { FaInstagram, FaYoutube, FaWhatsapp, FaFacebookF } from 'react-icons/fa';
+import { Link } from "react-router-dom";
 
 const Footer = () => {
   return (
@@ -11,17 +12,18 @@ const Footer = () => {
       transition={{ duration: 1, ease: 'easeInOut' }}
     >
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-6 border-t border-emerald-200 pt-6">
-        {/* Brand Name */}
-        <motion.div 
-          className="text-lg font-semibold"
-          initial={{ x: -40, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          transition={{ duration: 0.6 }}
-        >
-         <span className="bg-gradient-to-r from-emerald-900 to-emerald-400 text-transparent bg-clip-text">
-            Islamic Notes
-          </span>
-        </motion.div>
+      <Link to="/">
+  <motion.div 
+    className="text-lg font-semibold cursor-pointer"
+    initial={{ x: -40, opacity: 0 }}
+    animate={{ x: 0, opacity: 1 }}
+    transition={{ duration: 0.6 }}
+  >
+    <span className="bg-gradient-to-r from-emerald-900 to-emerald-400 text-transparent bg-clip-text">
+      Islamic Notes
+    </span>
+  </motion.div>
+</Link>
 
         {/* Social Icons */}
         <motion.nav

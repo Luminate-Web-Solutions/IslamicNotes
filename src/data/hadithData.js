@@ -1,5 +1,5 @@
 // /src/data/hadithData.js
-const hadithData = [
+export const hadithData = [
   {
     category: "🕌 Faith & Belief (Iman)",
     title: "Definition of Faith",
@@ -1432,8 +1432,5 @@ const hadithData = [
   },
     // more hadiths
   ];
-  const Categories = [
-    ...new Set(hadithData.map(h => h.category).filter(Boolean))
-  ];
-
-  export { hadithData, Categories };
+ 
+  export default hadithData;

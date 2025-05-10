@@ -1,7 +1,11 @@
 import React from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Categories } from '../data/hadithData';
+
+import { FaFilter } from "react-icons/fa";
+import img from '../assets/img.png';
+import { useState, useRef, useEffect } from 'react';
+
 
 const Header = ({ query, setQuery }) => {
   const navigate = useNavigate();
@@ -41,6 +45,9 @@ const Header = ({ query, setQuery }) => {
     { name: 'Bachon ki Tarbiyat 28', file: 'note32.pdf' },
   ];
 
+  const [open, setOpen] = useState(false);
+  const dropdownRef = useRef();
+
   const filtered = pdfList.filter(item =>
     item.name.toLowerCase().includes(query.toLowerCase())
   );
@@ -49,90 +56,100 @@ const Header = ({ query, setQuery }) => {
     setQuery('');
     navigate(`/read/${file}`);
   };
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setOpen(false);
+      }
+    };
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, []);
+return (
+  <motion.header
+    className="sticky top-0 z-50 bg-white w-full shadow-md"
+    initial={{ y: -60, opacity: 0 }}
+    
+    animate={{ y: 0, opacity: 1 }}
+    transition={{ duration: 0.6 }}
+  >
+    <div className="max-w-7xl mx-auto px-4 lg:px-8  py-4 flex flex-col lg:flex-row items-center gap-4 lg:gap-10">
 
-  return (
-    <motion.header
-      className="sticky top-0 z-50 bg-white  w-full shadow-md "
-      initial={{ y: -60, opacity: 0 }}
-      animate={{ y: 0, opacity: 1 }}
-      transition={{ duration: 0.6 }}
-    >
-      <div className="max-w-7xl mx-auto  lg:px-8 py-4 flex flex-col lg:flex-row  gap-5 sm:gap-x-9">
+    {/* Logo */}
+    <Link to="/" className="flex items-center  justify-center text-center">
+      <img src={img} width={80} height={40} alt="IslamicNotes Logo" className='flex items-center justify-center pb-10' />
+      <span className="text-xl sm:text-2xl font-bold   font-serif bg-gradient-to-r from-emerald-900 to-emerald-400 text-transparent bg-clip-text">
+        Islamic Notes
+      </span>
+    </Link>
 
-        
-        {/* Logo */}
-        <Link
-          to="/"
-          className="text-3xl sm:text-4xl font-extrabold tracking-wide font-serif flex items-center space-x-1 no-underline hover:no-underline"
-        >
-          <span className="bg-gradient-to-r from-emerald-900 to-emerald-400 text-transparent bg-clip-text">
-            Islamic Notes
-          </span>
-        </Link>
-
-        {/* Search */}
-        <div className="sm:w-1/2 flex-1 relative flex justify-center">
-          <input
-            type="text"
-            placeholder="Search Topics..."
-            value={query}
-            onChange={(e) => setQuery(e.target.value)}
-            className="w-full max-w-md p-2 border border-emerald-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-400"
-          />
-          {query && filtered.length > 0 && (
-            <ul className="absolute top-full mt-1 w-full max-w-md bg-white border border-emerald-200 rounded shadow-md z-50">
-              {filtered.map((item, idx) => (
-                <li
-                  key={idx}
-                  onClick={() => handleSelect(item.file)}
-                  className="cursor-pointer px-4 py-2 hover:bg-emerald-100 text-emerald-700"
-                >
-                  {item.name}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
-        {/* Navigation */}
-        <nav className="flex flex-wrap justify-center sm:justify-start hover:no-underline gap-4 relative">
-          {[
-            { to: '/', label: 'Home' },
-            { to: '/about', label: 'About' },
-            { to: '/notes', label: 'Notes' },
-            { to: '/contact', label: 'Contact Us' },
-            
-          ].map((link) => (
-            <Link
-              key={link.to}
-              to={link.to}
-              className="bg-green-600 text-white px-3 py-2 rounded-md text-lg font-medium "
+    {/* Search */}
+    <div className="flex-1 max-w-md w-full relative">
+      <input
+        type="text"
+        placeholder="Search Topics..."
+        value={query}
+        onChange={(e) => setQuery(e.target.value)}
+        className="w-full p-2 pl-4 border border-emerald-300 rounded-full shadow-sm focus:outline-none focus:ring-2 focus:ring-emerald-400 transition duration-200 placeholder:text-emerald-700"
+      />
+      {query && filtered.length > 0 && (
+        <ul className="absolute top-full left-0 mt-2 w-full bg-white border border-emerald-200 rounded-lg shadow-lg z-50 overflow-y-auto max-h-60">
+          {filtered.map((item, idx) => (
+            <li
+              key={idx}
+              onClick={() => handleSelect(item.file)}
+              className="cursor-pointer px-4 py-2 hover:bg-emerald-100 text-emerald-700 transition"
             >
-              {link.label}
-            </Link>
+              {item.name}
+            </li>
           ))}
+        </ul>
+      )}
+    </div>
 
-          {/* Categories Dropdown */}
-          <div className="relative group">
-            <button className="bg-green-600 text-white px-3 py-2 rounded-md text-lg font-medium">
-              Categories
-            </button>
-            <div className="absolute hidden group-hover:block bg-white shadow-lg border border-emerald-200 rounded-md mt-2 z-50 max-h-72 overflow-y-auto w-56">
-              {Categories.map((cat, i) => (
-                <Link
-                  key={i}
-                  to={`/categories?filter=${encodeURIComponent(cat)}`}
-                  className="block px-4 py-2 text-emerald-700"
-                >
-                  {cat}
-                </Link>
-              ))}
-            </div>
-          </div>
-        </nav>
-      </div>
-    </motion.header>
-  );
+    {/* Navigation */}
+    <nav className="flex flex-wrap items-center justify-center gap-4 lg:gap-6">
+      {[
+        { to: '/', label: 'Home' },
+        { to: '/about', label: 'About' },
+        { to: '/notes', label: 'Notes' },
+        { to: '/contact', label: 'Contact Us' },
+      ].map((link) => (
+        <Link
+          key={link.to}
+          to={link.to}
+          className="text-emerald-900 hover:bg-emerald-100 px-4 py-2 rounded-md font-medium transition"
+        >
+          {link.label}
+        </Link>
+      ))}
+    </nav>
+  </div>
+
+  {/* Mobile Toggle Button */}
+  <div className="lg:hidden flex justify-end px-4 py-2">
+    <button
+      className="text-white bg-emerald-600 focus:outline-none"
+      onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        className="h-6 w-6"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke="currentColor"
+      >
+        <path
+          strokeLinecap="round"
+          strokeLinejoin="round"
+          strokeWidth={2}
+          d="M4 6h16M4 12h16m-7 6h7"
+        />
+      </svg>
+    </button>
+  </div>
+  </motion.header>
+
+);
 };
-
 export default Header;

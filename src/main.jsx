@@ -12,7 +12,11 @@ import About from './pages/About';
 import Notes from './pages/Notes';
 import ContactUs from './pages/ContactUs';
 import PDFReader from './pages/PDFReader';
-import Categories from './data/Categories';
+import CategoriesPage from './data/CategoriesPage';
+import filterData from './pages/filterData';
+import DuaPage from "./pages/DuaPage";
+import AkhlaqPage from './pages/AkhlaqPage';
+
 
 // ✅ Define your router
 const router = createBrowserRouter([
@@ -25,9 +29,10 @@ const router = createBrowserRouter([
       { path: 'notes', element: <Notes /> },
       { path: 'contact', element: <ContactUs /> },
       { path: 'read/:fileName', element: <PDFReader /> },
-      { path: 'categories', element: <Categories /> },
-    
-      
+      { path: 'filter', element: <filterData /> },
+      {path: 'dua', element: <DuaPage />}, 
+    {path: 'akhlaq', element: <AkhlaqPage />}, 
+          {path: 'CategoriesPage', element: <CategoriesPage />},
     ],
   },
 ], {
