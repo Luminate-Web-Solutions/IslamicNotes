@@ -1,116 +1,78 @@
 import React from "react";
 import { motion } from "framer-motion";
-import {
-  FaBookOpen,
-  FaMobileAlt,
-  FaUsers,
-  FaFolderOpen,
-  FaInfinity,
-  FaShieldAlt,
-} from "react-icons/fa";
+import HadithData from "../data/HadithData"; 
+import Notes from "../pages/Notes";
+import img from "../hero.jpg"; // Adjust the path as necessary
 
-const features = [
-  {
-    title: "Authentic Resources",
-    description:
-      "All notes are based on Qur’an and authentic Hadith, verified by knowledgeable individuals to ensure trust and reliability.",
-      icon: <FaBookOpen className="text-4xl text-emerald-600 mb-4" />,
-    },
-  {
-    title: "Easy Access",
-    description:
-      "Access our content from any device, with smooth downloads and optimized mobile readability for a seamless experience.",
-      icon: <FaMobileAlt className="text-4xl text-emerald-600 mb-4" />,
-    },
-  {
-    title: "Community Driven",
-    description:
-      "Our platform grows with your contributions. Upload your notes, share your knowledge, and help others benefit.",
-      icon: <FaUsers className="text-4xl text-emerald-600 mb-4" />,
-    },
-  {
-    title: "Organized Topics",
-    description:
-      "Explore categorized notes by topic, speaker, or series for quick access to the material you're looking for.",
-      icon: <FaFolderOpen className="text-4xl text-emerald-600 mb-4" />,
-    },
-  {
-    title: "Free Forever",
-    description:
-      "Knowledge should be free. Our platform provides all materials without any charges, subscriptions, or ads.",
-      icon: <FaInfinity className="text-4xl text-emerald-600 mb-4" />,
-    },
-  {
-    title: "Safe & Private",
-    description:
-      "Your uploads and downloads are secure with us. We value privacy and don’t track or misuse any user data.",
-      icon: <FaShieldAlt className="text-4xl text-emerald-600 mb-4" />,
-    },
-];
 
 const Home = () => {
+  const hadithToShow = HadithData.slice(0, 3);
   return (
     <>
       {/* Hero Section */}
       <motion.section
-  id="Home"
-  className="py-20 px-6 bg-white rounded-2xl text-center text-emerald-800"
-
-  initial={{ opacity: 0, y: -50 }}
+        id="Home"
+       className="relative bg-cover bg-center bg-no-repeat rounded-2xl text-center text-white py-32 px-4"
+  style={{ backgroundImage: `url(${img})` }}
+  initial={{ opacity: 0, y: -30 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.8 }}
->
-  <div className="max-w-5xl mx-auto text-white">
-    <h1 className="text-4xl sm:text-5xl font-bold leading-tight mb-6 drop-shadow-xl">
+      >
+        <div className="absolute inset-0 rounded-2xl bg-gray-900 bg-opacity-50"></div> {/* Dark overlay */}
+  
+  <div className="relative z-10 max-w-5xl mx-auto">
+    <h1 className="text-3xl text-white sm:text-5xl font-bold mb-4">
       Discover, Read & Share Authentic Islamic Knowledge
     </h1>
-    <p className="text-lg sm:text-xl font-light mb-8 text-emerald-500">
+    <p className="text-lg text-white sm:text-xl mb-6">
       Islamic Notes is your source for verified Islamic content — free, easy to access, and always growing with your contributions.
     </p>
     <a
-      href="/notes"
-      className="inline-block bg-emerald-800 text-white font-semibold px-6 py-3 rounded-full shadow-lg hover:bg-emerald-600 hover:text-white transition"
+      href="/Notes"
+      className="bg-[#112250]  text-white px-6 py-3 rounded-full shadow transition"
     >
-      Browse Now
+      Explore Now
     </a>
   </div>
 </motion.section>
 
-
-      {/* Why Choose Us Section */}
-      <motion.section
-        className="py-20 px-6 rounded-2xl bg-white text-emerald-900"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        transition={{ duration: 1 }}
-        viewport={{ once: true }}
-      >
-        <div className="max-w-6xl mx-auto text-center">
-          <h2 className="text-4xl font-bold mb-12 text-emerald-700">
-            Why Choose Us?
-          </h2>
-          <div className="grid gap-10 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-            {features.map((feature, index) => (
-              <motion.div
-                key={index}
-                className="bg-emerald-50 p-6 rounded-xl border border-emerald-100 shadow hover:shadow-md transition duration-300"
-                whileHover={{ scale: 1.03 }}
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: index * 0.1 }}
-                viewport={{ once: true }}
+        {/* Hadees Section */}
+      <section className="py-16 bg-white px-4 text-center">
+        <h2 className="text-2xl font-bold text-[#112250] mb-8">HADITH</h2>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {hadithToShow.map((item, i) => (
+            <div key={item.id || i} className="bg-[#112250] text-white p-6 rounded-xl">
+              <p className="mb-4 text-sm italic">"{item.content}"</p>
+              <p className="text-xs mb-3 text-emerald-200">{item.reference}</p>
+              <a
+                href="./data/hadithData"
+                className="inline-block bg-white text-[#112250] px-5 py-2 rounded-full hover:bg-emerald-100"
               >
-                <h3 className="text-xl font-semibold mb-3 text-emerald-800">
-                  {feature.title}
-                </h3>
-                <p className="text-sm text-emerald-700 leading-relaxed">
-                  {feature.description}
-                </p>
-              </motion.div>
-            ))}
-          </div>
+                Read More
+              </a>
+            </div>
+          ))}
         </div>
-      </motion.section>
+      </section>
+{/* Notes Section */}
+<section className="py-16 bg-emerald-50 px-4 text-center">
+  <h2 className="text-2xl font-bold text-[#112250] mb-8">NOTES</h2>
+  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
+    {[1, 2, 3, 4].map((_, i) => (
+      <div key={i} className="bg-[#112250] p-4 rounded-xl shadow-md">
+        <p className="text-white mb-3 text-sm font-medium">
+          App se Pahunchayi Gayi ye Hadees Notes
+        </p>
+        <a
+          href="#"
+          className="inline-block bg-white text-[#112250] px-4 py-2 rounded-full "
+        >
+          Read More
+        </a>
+      </div>
+    ))}
+  </div>
+</section>
     </>
   );
 };

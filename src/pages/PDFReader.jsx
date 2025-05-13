@@ -1,19 +1,23 @@
-import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams } from "react-router-dom";
 
-const PDFReader = () => {
-  const { fileName } = useParams();
-  const pdfPath = `/assets/${fileName}`;
+const PdfReader = () => {
+  const { filename } = useParams();
+  const pdfUrl = `/assets/${filename}`;
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-green-50 p-4">
-      <iframe
-         src={pdfPath}
-        title={fileName}
-        className="w-full h-[90vh] border border-green-300 shadow-lg rounded-xl"
-      ></iframe>
+    <div className="min-h-screen bg-[#f9f9f9] p-4">
+      <h1 className="text-xl font-bold text-center mb-4 text-[#112250]">Notes</h1>
+      <div className="flex justify-center">
+        <iframe
+          src={pdfUrl}
+          title="PDF Viewer"
+          width="100%"
+          height="600px"
+          className="border rounded shadow-lg max-w-5xl"
+        ></iframe>
+      </div>
     </div>
   );
 };
 
-export default PDFReader;
+export default PdfReader;

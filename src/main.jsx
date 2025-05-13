@@ -1,9 +1,8 @@
 import React, { StrictMode } from 'react';
 import ReactDOM from 'react-dom/client';
-import { createBrowserRouter, RouterProvider,} from 'react-router-dom';
+import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { SearchProvider } from './context/SearchContext';
 import './index.css';
-
 
 // Pages
 import MainLayout from './layouts/MainLayout';
@@ -13,13 +12,12 @@ import Notes from './pages/Notes';
 import ContactUs from './pages/ContactUs';
 import PDFReader from './pages/PDFReader';
 import CategoriesPage from './data/CategoriesPage';
-import filterData from './pages/filterData';
-import DuaPage from "./pages/DuaPage";
+import DuaPage from './pages/DuaPage';
 import AkhlaqPage from './pages/AkhlaqPage';
-import SalahPage from "./pages/SalahPage";
+import SalahPage from './pages/SalahPage';
+import HadithCategory from './pages/HadithCategory';
 
 
-// ✅ Define your router
 const router = createBrowserRouter([
   {
     path: '/',
@@ -30,12 +28,11 @@ const router = createBrowserRouter([
       { path: 'notes', element: <Notes /> },
       { path: 'contact', element: <ContactUs /> },
       { path: 'read/:fileName', element: <PDFReader /> },
-      { path: ' / ', element: <filterData /> },
-      {path: 'dua', element: <DuaPage />}, 
-    {path: 'akhlaq', element: <AkhlaqPage />}, 
-          {path: 'CategoriesPage', element: <CategoriesPage />},
-           {path: '/salah', element: <SalahPage />},
-           
+      { path: 'dua', element: <DuaPage /> },
+      { path: 'akhlaq', element: <AkhlaqPage /> },
+      { path: 'salah', element: <SalahPage /> },
+      { path: 'categories', element: <CategoriesPage /> },
+         { path: 'categories/:categoryName', element: <HadithCategory /> },
     ],
   },
 ], {
@@ -45,7 +42,6 @@ const router = createBrowserRouter([
   }
 });
 
-// ✅ Single correct render call
 ReactDOM.createRoot(document.getElementById('root')).render(
   <StrictMode>
     <SearchProvider>

@@ -1,58 +1,87 @@
 import React, { useState } from "react";
-import hadithData from "../data/hadithData";
-import filterData from "../pages/filterData"; // Ensure this path is correct
+import { useNavigate } from "react-router-dom";
+import filterData from "../pages/filterData"; 
 import { FaFilter } from "react-icons/fa";
 import { BookOpen } from "lucide-react";
 
+// Your existing Islamic Notes data
+const notes = [
+  {
+    title: "Aap ka Mustaqbil Aap ke Hath mein",
+    description: "A motivational reminder that your future is in your hands, shaped by your actions and choices",
+    pdf: "./assets/note1.pdf"
+  },
+  {
+    title: "Amaanat",
+    description: "The concept of trust and responsibility in Islam, highlighting the importance of fulfilling duties and obligations",
+    pdf: "./assets/note2.pdf"
+  },
+  // ... (include all your note objects here)
+];
+
 const Notes = () => {
   const [selectedFilter, setSelectedFilter] = useState("");
-  
-  // Ensure filterData is an array
-  const filterList = Array.isArray(filterData) ? [...new Set(filterData.map((item) => item.title))] : [];
+  const [searchTerm, setSearchTerm] = useState("");
+  const navigate = useNavigate();
 
-  // Find filter content based on the selected filter
+  const filterList = Array.isArray(filterData)
+    ? [...new Set(filterData.map((item) => item.title))]
+    : [];
+
   const filterContent = filterData.find((item) => item.title === selectedFilter);
 
-  return (
-    <section className="min-h-screen px-4 sm:px-10 py-16 text-green-400 bg-cover bg-no-repeat bg-fixed">
-      <section className="bg-white py-10 px-4 space-y-12">
-        {/* 🧭 Filter Section */}
-        <div className="max-w-4xl mx-auto">
-          <h2 className="text-xl font-semibold text-emerald-800 mb-4">🧭 Filter Content</h2>
-          <div className="flex items-center text-emerald-800 ml-auto">
-            <FaFilter className="text-xl mr-2" />
-            <span className="text-sm font-medium">Filter</span>
-          </div>
-          <select
-            value={selectedFilter}
-            onChange={(e) => setSelectedFilter(e.target.value)}
-            className="w-full sm:w-auto px-4 py-2 border border-green-400 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
-          >
-            <option value="">Select Filter</option>
-            {filterList.length > 0 && filterList.map((filter, idx) => (
-              <option key={idx} value={filter}>
-                {filter}
-              </option>
-            ))}
-          </select>
+  const filteredNotes = notes.filter((note) =>
+    note.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
+    note.description.toLowerCase().includes(searchTerm.toLowerCase())
+  );
 
-          {filterContent && (
-            <div className="mt-6 p-4 border rounded-lg bg-gray-50">
-              <h3 className="text-lg font-bold text-emerald-800">{filterContent.title}</h3>
-              {filterContent.image && (
-                <img
-                  src={filterContent.image}
-                  alt={filterContent.title}
-                  className="my-4 w-full max-h-64 object-cover rounded-xl"
-                />
-              )}
-              <p className="text-gray-700">{filterContent.content}</p>
-            </div>
-          )}
-        </div>
-      </section>
+  const openPDF = (pdfUrl) => {
+    navigate(`/read/${pdfUrl.split('/').pop()}`);
+  };
+
+  return (
+    <section className="bg-white text-[#112250] py-16 px-4">
+
+      {/* 📘 Islamic Notes Section */}
+      <div className="text-center mt-20 mb-12">
+        <h2 className="text-4xl text-[#112250] font-bold mb-2"> Explore Islamic Notes</h2>
+        <p className="text-lg text-[#112250]">Browse and learn from authentic Islamic sources.</p>
+        <input
+          type="text"
+          placeholder="Search notes..."
+          className="mt-6 px-7 py-3 rounded-md border border-blue-400 w-full max-w-md text-center focus:outline-[#112250] focus:ring-3 focus:ring-blue-600"
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+        />
+      </div>
+
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 max-w-7xl mx-auto px-4">
+        {filteredNotes.length > 0 ? (
+         filteredNotes.map((note, idx) => (
+           <div
+  key={idx}
+  className="relative bg-[#112250] text-white border border-blue-300 rounded-xl shadow-md p-6 hover:shadow-lg transition-transform duration-300 hover:scale-105"
+>
+  <div className="absolute top-4 right-4 text-white opacity-50">
+    <BookOpen className="text-2xl" />
+  </div>
+
+  <h3 className="text-lg font-semibold mb-3">{note.title}</h3>
+  <p className="text-sm mb-4 leading-relaxed">{note.description}</p>
+
+  <button
+    onClick={() => openPDF(note.pdf)}
+    className="mt-auto bg-white text-[#112250] font-medium text-sm px-5 py-2 rounded-full hover:bg-blue-100 transition"
+  >
+    Read More
+  </button>
+</div>
+        ))
+        ) : (
+          <p className="text-center text-[#112250]">No notes found.</p>
+        )}
+      </div>
     </section>
   );
-};
-
+}
 export default Notes;
