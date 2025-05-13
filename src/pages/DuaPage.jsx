@@ -1,48 +1,37 @@
 import React from "react";
-import { useParams } from "react-router-dom";
-import Icon from "../components/Icon"; // If you want to show an icon
-import Drawing from "../components/Drawing"; // If you want to show an illustration
-import AnimationWrapper from "../components/AnimationWrapper"; // If you want to animate the page content
-import DuaImage from '../assets/DUA.png';
 
+const DuaPage = () => (
+  <section className="p-6">
+    <h1 className="text-3xl font-bold mb-6 text-center">🙏 Dua (Supplication)</h1>
 
-const DuaPage = () => {
-  const { category } = useParams(); // To get the category name from URL params
-
-  return (
-    <div className="min-h-screen px-4 py-10 bg-emerald-50 text-emerald-900">
-      <h1 className="text-3xl font-bold text-center mb-8">{category}</h1>
-
-      <div className="text-center mb-8">
-        {/* Display Category Icon */}
-        <Icon category={category} />
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+      {/* Left: Image */}
+      <div>
+        <img
+          src="/images/dua.png"  // Image from public folder
+          alt="Dua"
+          className="rounded-2xl shadow-lg w-full max-w-md mx-auto"
+        />
       </div>
 
-      <div className="max-w-2xl mx-auto">
-        <p className="text-lg mb-4">
-          {/* Here you can insert a description about the category */}
-          Explanation about {category} content goes here. 
+      {/* Right: Content */}
+      <div className="space-y-4">
+        <p>
+          Dua is an essential part of Islamic practice. It is the act of calling upon Allah for help, guidance, and support in times of need.
+        </p>
+        <p>
+          The Prophet Muhammad ﷺ emphasized the power of Dua, saying: "Dua is the essence of worship."
         </p>
 
-        <div className="my-8">
-          {/* Drawing or Illustration for explanation */}
-          <Drawing category={category} />
-        </div>
-
-<div className="my-6 text-center">
-  <img src={DuaImage} alt="Dua Illustration" className="mx-auto rounded-xl shadow-lg w-full max-w-md" />
-</div>
-
-        <AnimationWrapper>
-          <div className="my-4 text-center">
-            {/* Any additional content or animation */}
-            <p>Learn more about {category}.</p>
-          </div>
-        </AnimationWrapper>
+        <h2 className="text-xl font-semibold mt-4">🌙 Key Points of Dua</h2>
+        <ul className="list-disc list-inside text-gray-700">
+          <li>Must be done with sincerity and belief</li>
+          <li>Can be made in any language</li>
+          <li>Fosters a personal connection with Allah</li>
+        </ul>
       </div>
     </div>
-  );
-};
+  </section>
+);
 
 export default DuaPage;
-

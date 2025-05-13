@@ -1,48 +1,38 @@
-import React, { useState } from "react";
-import hadithData from "../data/hadithData";
-import { filterData } from "../pages/filterData"; 
-import { FaFilter } from "react-icons/fa";
-import { BookOpen } from "lucide-react";
+const filterData = [
+  {
+    title: "Akhlaq",
+    image: "/images/AKHLAQ.png",
+    content: "This page covers good manners (Akhlaq) in Islam including kindness, humility, and patience."
+  },
+  {
+    title: "Dua",
+    image: "/images/DUA.png",
+    content: "Learn important supplications (Dua) from the Qur'an and Sunnah."
+  },
+  {
+    title: "Salah",
+    image: "/images/SALAH.png",
+    content: "Explore the importance and method of prayer (Salah) with tips and benefits."
+  },
+  {
+  title: "Iman",
+  image: "/images/iman.png",
+  content: "Iman (Faith) is the foundation of a Muslim's belief, consisting of belief in Allah, His angels, His Books, His messengers, the Day of Judgment, and Qadar (divine decree)."
+},
+{
+  title: "Tawheed",
+  image: "/images/tawheed.png",
+  content: "Tawheed (Oneness of Allah) is the core concept in Islam, affirming that Allah is the only God, without any partners or equals."
+},
+{
+  title: "Zakat",
+  image: "/images/zakat.png",
+  content: "Zakat (Charity) is an obligatory act of charity in Islam, purifying wealth by giving a portion to those in need, helping to promote social justice."
+}
 
-// Ensure that filterData is an array and map it correctly
-const filterList = Array.isArray(filterData) ? [...new Set(filterData.map((item) => item.title))] : [];
 
-const NotesPage = () => {
-  const [selectedFilter, setSelectedFilter] = useState("");
+  
+  // Add more sections as needed
+];
 
-  const filterContent = filterData.find((item) => item.title === selectedFilter);
-
-  return (
-    <section>
-      {/* Filter Section */}
-      <div>
-        <h2>🧭 Filter Content</h2>
-        <div>
-          <FaFilter className="text-xl" />
-          <span>Filter</span>
-        </div>
-        <select
-          value={selectedFilter}
-          onChange={(e) => setSelectedFilter(e.target.value)}
-        >
-          <option value="">Select Filter</option>
-          {filterList.length > 0 && filterList.map((filter, idx) => (
-            <option key={idx} value={filter}>
-              {filter}
-            </option>
-          ))}
-        </select>
-
-        {filterContent && (
-          <div>
-            <h3>{filterContent.title}</h3>
-            {filterContent.image && <img src={filterContent.image} />}
-            <p>{filterContent.content}</p>
-          </div>
-        )}
-      </div>
-    </section>
-  );
-};
-
-export default Notes; // Export the NotesPage component
+export default filterData;
