@@ -1,76 +1,92 @@
 import React from "react";
-import { motion } from "framer-motion";
-import HadithData from "../data/HadithData"; 
-import Notes from "../pages/Notes";
-import img from "../hero.jpg"; // Adjust the path as necessary
+import { Link } from "react-router-dom";
+import hadithData from "../data/hadithData";
+import notesData from "../data/notesData";
 
+// Images
+import hero1 from "../assets/hero.jpg";
+import hero2 from "../assets/hero2.jpg";
+import hero3 from "../assets/hero3.jpg";
+
+// Components
+import Hero from "../components/Hero";
+
+const bgImages = [hero1, hero2, hero3];
 
 const Home = () => {
-  const hadithToShow = HadithData.slice(0, 3);
+  const hadithToShow = Array.isArray(hadithData) ? hadithData.slice(0, 3) : [];
+
   return (
     <>
-      {/* Hero Section */}
-      <motion.section
-        id="Home"
-       className="relative bg-cover bg-center bg-no-repeat rounded-2xl text-center text-white py-32 px-4"
-  style={{ backgroundImage: `url(${img})` }}
-  initial={{ opacity: 0, y: -30 }}
-  animate={{ opacity: 1, y: 0 }}
-  transition={{ duration: 0.8 }}
-      >
-        <div className="absolute inset-0 rounded-2xl bg-gray-900 bg-opacity-50"></div> {/* Dark overlay */}
-  
-  <div className="relative z-10 max-w-5xl mx-auto">
-    <h1 className="text-3xl text-white sm:text-5xl font-bold mb-4">
-      Discover, Read & Share Authentic Islamic Knowledge
-    </h1>
-    <p className="text-lg text-white sm:text-xl mb-6">
-      Islamic Notes is your source for verified Islamic content — free, easy to access, and always growing with your contributions.
-    </p>
-    <a
-      href="/Notes"
-      className="bg-[#112250]  text-white px-6 py-3 rounded-full shadow transition"
-    >
-      Explore Now
-    </a>
-  </div>
-</motion.section>
-
-        {/* Hadees Section */}
-      <section className="py-16 bg-white px-4 text-center">
-        <h2 className="text-2xl font-bold text-[#112250] mb-8">HADITH</h2>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {hadithToShow.map((item, i) => (
-            <div key={item.id || i} className="bg-[#112250] text-white p-6 rounded-xl">
-              <p className="mb-4 text-sm italic">"{item.content}"</p>
-              <p className="text-xs mb-3 text-emerald-200">{item.reference}</p>
-              <a
-                href="./data/hadithData"
-                className="inline-block bg-white text-[#112250] px-5 py-2 rounded-full hover:bg-emerald-100"
-              >
-                Read More
-              </a>
-            </div>
-          ))}
+      {/* Hero Section with Carousel */}
+        <Hero bgImages={bgImages} />
+        <div>
+          {/* You can add your content here */}
         </div>
-      </section>
-{/* Notes Section */}
-<section className="py-16 bg-emerald-50 px-4 text-center">
-  <h2 className="text-2xl font-bold text-[#112250] mb-8">NOTES</h2>
-  <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-6xl mx-auto">
-    {[1, 2, 3, 4].map((_, i) => (
-      <div key={i} className="bg-[#112250] p-4 rounded-xl shadow-md">
-        <p className="text-white mb-3 text-sm font-medium">
-          App se Pahunchayi Gayi ye Hadees Notes
-        </p>
-        <a
-          href="#"
-          className="inline-block bg-white text-[#112250] px-4 py-2 rounded-full "
+   {/* HADITH Section */}
+<section className="min-h-screen py-16 px-6 bg-white text-center  flex-col justify-center mt-10">
+  <div className="max-w-7xl  mx-auto">
+    <h1 className="text-3xl font-bold mb-12 capitalize text-[#112250]">
+      Hadith
+    </h1>
+    <div className="grid grid-cols-1  text-white sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {hadithToShow.map((item, index) => (
+        <div
+          key={index}
+          className="bg-[#112250] text-white p-6 rounded-xl shadow-md flex flex-col justify-between"
         >
-          Read More
-        </a>
-      </div>
-    ))}
+          <div>
+            <h3 className="text-xl text-white font-semibold mb-2">{item.title}</h3>
+            <p className="text-sm text-white italic mb-3">
+              {item.description?.slice(0, 100)}
+            </p>
+            <p className="text-xs  text-white mb-4">Category: {item.category}</p>
+          </div>
+         <Link
+  to={`/hadith/${item.category?.toLowerCase()}`}
+  className="inline-block bg-white text-[#112250] px-5 py-2 rounded-full hover:bg-blue-800 hover:text-white transition"
+>
+  Read More
+</Link>
+
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+{/* NOTES Section */}
+<section className="min-h-screen py-16 px-6 bg-gray-100 text-center mt-10">
+  <div className="max-w-7xl mx-auto">
+    <h1 className="text-3xl font-bold mb-12 capitalize text-[#112250]">
+      Notes
+    </h1>
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      {Array.isArray(notesData) &&
+        notesData.slice(0, 3).map((note, index) => (
+          <div
+            key={index}
+            className="bg-white border border-gray-200 p-6 rounded-xl shadow-md flex flex-col justify-between"
+          >
+            <div>
+              <h3 className="text-xl font-semibold text-[#112250] mb-2">
+                {note.title}
+              </h3>
+              <p className="text-sm text-gray-700 mb-3">
+                {note.description?.slice(0, 100)}...
+              </p>
+            </div>
+            <a
+              href={note.pdf}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mt-auto inline-block bg-[#112250] text-white px-5 py-2 rounded-full hover:bg-blue-800 hover:text-white transition"
+            >
+              Read More
+            </a>
+          </div>
+        ))}
+    </div>
   </div>
 </section>
     </>

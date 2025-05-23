@@ -1,8 +1,9 @@
-import React, { StrictMode } from 'react';
+import React, { StrictMode, Suspense } from 'react';
 import ReactDOM from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { SearchProvider } from './context/SearchContext';
 import './index.css';
+
 
 // Pages
 import MainLayout from './layouts/MainLayout';
@@ -16,6 +17,7 @@ import DuaPage from './pages/DuaPage';
 import AkhlaqPage from './pages/AkhlaqPage';
 import SalahPage from './pages/SalahPage';
 import HadithCategory from './pages/HadithCategory';
+import PrivacyPolicy from './pages/PrivacyPolicy';
 
 
 const router = createBrowserRouter([
@@ -31,21 +33,24 @@ const router = createBrowserRouter([
       { path: 'dua', element: <DuaPage /> },
       { path: 'akhlaq', element: <AkhlaqPage /> },
       { path: 'salah', element: <SalahPage /> },
-      { path: 'categories', element: <CategoriesPage /> },
-         { path: 'categories/:categoryName', element: <HadithCategory /> },
+      { path: "/categories/:type", element: <CategoriesPage /> },
+      { path: '/hadith/:category', element: <HadithCategory /> },
+        { path: 'privacy', element: <PrivacyPolicy /> },
     ],
   },
 ], {
   future: {
     v7_startTransition: true,
     v7_relativeSplatPath: true,
-  }
+  },
 });
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <SearchProvider>
-      <RouterProvider router={router} />
-    </SearchProvider>
+    <Suspense fallback={<div className="text-center mt-20 text-xl">Loading translations...</div>}>
+        <SearchProvider>
+          <RouterProvider router={router} />
+        </SearchProvider>
+    </Suspense>
   </StrictMode>
 );

@@ -1,5 +1,5 @@
 // /src/data/hadithData.js
-export const hadithData = [
+ const hadithData = [
   {
     category: "🕌 Faith & Belief (Iman)",
     title: "Definition of Faith",

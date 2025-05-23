@@ -1,34 +1,31 @@
 // src/pages/HadithCategory.jsx
-import React from 'react';
-import { useParams, Link } from 'react-router-dom';
-import hadithData from '../data/hadithData';
+import { useParams } from "react-router-dom";
+import hadithData from "../data/hadithData"; // adjust if needed
 
 const HadithCategory = () => {
-  const { categoryName } = useParams();
-  const filteredHadiths = hadithData.filter(
-    (hadith) => hadith.category.toLowerCase() === categoryName.toLowerCase()
+  const { category } = useParams();
+
+  const filteredHadith = hadithData.filter(
+    (item) => item.category.toLowerCase() === category.toLowerCase()
   );
 
   return (
-    <div className="p-6">
-      <Link to="/categories" className="text-blue-600 underline mb-4 inline-block">
-        ← Back to Categories
-      </Link>
-      <h1 className="text-3xl font-bold mb-4">Hadiths on {categoryName}</h1>
-
-      {filteredHadiths.length === 0 ? (
-        <p>No Hadiths found for this category.</p>
-      ) : (
-        <div className="space-y-6">
-          {filteredHadiths.map((hadith) => (
-            <div key={hadith.id} className="bg-white p-4 rounded-xl shadow">
-              <h2 className="text-xl font-semibold text-[#112250]">{hadith.title}</h2>
-              <p className="text-gray-700 mt-2">{hadith.description}</p>
-              <p className="text-sm text-gray-500 mt-1 italic">{hadith.reference}</p>
+    <div className="p-6 max-w-5xl mx-auto">
+      <h1 className="text-3xl font-bold text-[#112250] capitalize mb-6">
+        {category} Hadith
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {filteredHadith.length > 0 ? (
+          filteredHadith.map((item, index) => (
+            <div key={index} className="bg-[#112250] text-white p-6 rounded-xl shadow-md">
+              <h3 className="text-xl font-semibold mb-2">{item.title}</h3>
+              <p className="text-sm italic mb-4">{item.description}</p>
             </div>
-          ))}
-        </div>
-      )}
+          ))
+        ) : (
+          <p className="text-gray-600 col-span-full">No Hadith found for this category.</p>
+        )}
+      </div>
     </div>
   );
 };
